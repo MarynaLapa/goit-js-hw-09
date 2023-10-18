@@ -13,19 +13,13 @@ function getRandomHexColor() {
 function handlerStart() {
     btnStart.setAttribute('disabled', '');
     btnStop.removeAttribute('disabled');
-
     timerId = setInterval(() => {
     document.body.style.backgroundColor = getRandomHexColor();
     }, 1000);
-    
-    console.log(btnStart)
-    console.log(btnStop)
 }
 
 function handlerStop() {
     btnStop.setAttribute('disabled', '');
     btnStart.removeAttribute('disabled');
     clearTimeout(timerId);
-    console.log(btnStart)
-    console.log(btnStop)
 }
