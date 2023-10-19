@@ -8,35 +8,44 @@ form.addEventListener('submit', handlerClick)
 function handlerClick(evt) {
   evt.preventDefault();
   const parameters = {
-    delay: evt.currentTarget.elements.delay.value,
-    step: evt.currentTarget.elements.step.value,
-    amount: evt.currentTarget.elements.amount.value
+    delay: Number(evt.currentTarget.elements.delay.value),
+    step: Number(evt.currentTarget.elements.step.value),
+    amount: Number(evt.currentTarget.elements.amount.value)
   }
-  console.log(parameters)
+  
+  let delay = parameters.delay;
 
+  for (let position = 1; position <= parameters.amount; position += 1){
+    console.log(position, delay)
+    createPromise(position, delay)
+      .then(({ position, delay }) => {
+        Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
+        // console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
+      })
+      .catch(({ position, delay }) => {
+        Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
+        // console.log(`❌ Rejected promise ${position} in ${delay}ms`);
+      });
+    
+    delay += parameters.step;
+
+    createPromise(position, delay);
+  }
 }
-
-
 
 function createPromise(position, delay) {
-  setTimeout(() => {
-    const shouldResolve = Math.random() > 0.3;
+  return new Promise((res, rej) => {
+     setTimeout(() => {
+      const shouldResolve = Math.random() > 0.3;
       if (shouldResolve) {
-        console.log('I\'m where')
+        res({ position, delay }) 
       } else {
-        console.log('титити')
+        rej({ position, delay })
       }
-  }, 1000)
-  
+    }, delay)
+  })  
 }
 
 
-// createPromise(2, 1500)
-//   .then(({ position, delay }) => {
-//     console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
-//   })
-//   .catch(({ position, delay }) => {
-//     console.log(`❌ Rejected promise ${position} in ${delay}ms`);
-//   });
 
 

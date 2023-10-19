@@ -30,10 +30,7 @@ const options = {
         } else {
             elements.btnStart.disabled = false;
         }
-        
-    // onChange: function() {
-    //             elements.btnStart.disabled = false;
-    //         }  
+
     },
 };
 
