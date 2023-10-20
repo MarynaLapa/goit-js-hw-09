@@ -1,12 +1,13 @@
 import Notiflix from 'notiflix';
 
 const form = document.querySelector('.form')  
-let delay = parameters.delay;
+
   
 form.addEventListener('submit', handlerClick)
 
 function handlerClick(evt) {
   evt.preventDefault();
+  let delay = parameters.delay;
   const parameters = {
     delay: Number(evt.currentTarget.elements.delay.value),
     step: Number(evt.currentTarget.elements.step.value),
