@@ -7,15 +7,19 @@ form.addEventListener('submit', handlerClick)
 
 function handlerClick(evt) {
   evt.preventDefault();
-  let delay = parameters.delay;
+  
   const parameters = {
     delay: Number(evt.currentTarget.elements.delay.value),
     step: Number(evt.currentTarget.elements.step.value),
     amount: Number(evt.currentTarget.elements.amount.value)
   }
 
+ let delay = parameters.delay;
+  // console.log(delay)
+  
   for (let position = 1; position <= parameters.amount; position += 1){
     
+
     createPromise(position, delay)
       .then(({ position, delay }) => {
         Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
